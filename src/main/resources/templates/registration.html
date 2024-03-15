@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト管理システム</title>
+    <!-- CSSファイルを読み込む -->
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+    <h1>シフト管理システム</h1>
+
+    <!-- シフト情報の追加フォーム -->
+    <h2>シフト追加</h2>
+    <form th:action="@{/shifts}" method="post" onsubmit="return validateForm()">
+        <label for="startTime">開始時間:</label>
+        <input type="datetime-local" id="startTime" name="startTime" required>
+        <br>
+        <label for="endTime">終了時間:</label>
+        <input type="datetime-local" id="endTime" name="endTime" required>
+        <br>
+        <button type="submit">追加</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var startTimeInput = document.getElementById('startTime').value;
+            var endTimeInput = document.getElementById('endTime').value;
+
+            if (startTimeInput && endTimeInput) {
+                var startTime = new Date(startTimeInput);
+                var endTime = new Date(endTimeInput);
+
+                if (endTime <= startTime) {
+                    alert('終了時間は開始時間より後に設定してください。');
+                    return false; // フォームの送信をキャンセル
+                }
+            }
+
+            return true; // フォームの送信を許可
+        }
+    </script>
+</body>
+</html>

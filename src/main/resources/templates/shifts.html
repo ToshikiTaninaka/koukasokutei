@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト</title>
+     <link rel="stylesheet" href="shifts.css">
+</head>
+<body>
+    <h1>シフト一覧表</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>開始時刻</th>
+                <th>終了時刻</th>
+  
+            </tr>
+        </thead>
+        <tbody>
+            <!-- シフト情報を表示する部分 -->
+            <tr th:each="shift : ${shifts}">
+                <td th:text="${shift.shiftId}"></td>
+                <td th:text="${shift.startTime}"></td>
+                　
+                <td th:text="${shift.endTime}"></td>
+                <td>
+                    <form th:action="@{/shifts/delete/{id}(id=${shift.shiftId})}" method="post">
+                        <button type="submit">削除</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        <p>新しいシフトを追加したい場合は<a href="/view/registration">こちら</a>で追加できます。</p>
+    </table>
+</body>
+</html>
